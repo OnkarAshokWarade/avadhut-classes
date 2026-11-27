@@ -69,14 +69,25 @@ export const quizQuestions: QuizQuestion[] = [
 
 export const QUIZ_QUESTIONS_PER_PLAY = 6
 
-/** Shuffles a copy of the array (Fisher–Yates) and returns the first `count` items. */
-export function pickRandomQuestions(count = QUIZ_QUESTIONS_PER_PLAY): QuizQuestion[] {
-  const pool = [...quizQuestions]
-  for (let i = pool.length - 1; i > 0; i--) {
+/** Shuffles a copy of an array in place (Fisher–Yates) and returns it. */
+function shuffled<T>(items: T[]): T[] {
+  const copy = [...items]
+  for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
-    ;[pool[i], pool[j]] = [pool[j], pool[i]]
+    ;[copy[i], copy[j]] = [copy[j], copy[i]]
   }
-  return pool.slice(0, Math.min(count, pool.length))
+  return copy
+}
+
+/** Shuffles a question's answer options too, so the correct answer isn't always in the same spot. */
+function shuffleOptions(q: QuizQuestion): QuizQuestion {
+  const order = shuffled(q.options.map((_, i) => i))
+  return { question: q.question, options: order.map((i) => q.options[i]), answer: order.indexOf(q.answer) }
+}
+
+/** Picks `count` random questions for one play, with each question's own options shuffled too. */
+export function pickRandomQuestions(count = QUIZ_QUESTIONS_PER_PLAY): QuizQuestion[] {
+  return shuffled(quizQuestions).slice(0, Math.min(count, quizQuestions.length)).map(shuffleOptions)
 }
 
 export const formulaCards = {
