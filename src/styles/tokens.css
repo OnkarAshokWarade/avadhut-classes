@@ -1,0 +1,21 @@
+/*
+ * Brand design tokens — values copied character for character from the PDF.
+ * Stored as space-separated RGB channels so Tailwind can apply opacity.
+ */
+:root {
+  /* Primary colours (p15) */
+  --c-purple: 127 39 134; /* Avadhut Purple  #7F2786 */
+  --c-blue: 19 129 192; /* Classes Blue    #1381C0 */
+  --c-yellow: 254 190 35; /* Foundation Yellow #FEBE23 */
+
+  /* Supporting colours (p16) */
+  --c-plum: 59 15 64; /* Deep Plum #3B0F40 */
+  --c-deepblue: 14 102 153; /* Deep Blue #0E6699 */
+  --c-ink: 28 26 30; /* Ink       #1C1A1E */
+  --c-lavender: 246 239 247; /* Lavender  #F6EFF7 */
+  --c-sky: 234 243 250; /* Sky       #EAF3FA */
+  --c-chalk: 251 249 246; /* Chalk     #FBF9F6 */
+
+  /* Functional warning red for "avoid / never" markers — not a brand colour (open question #4) */
+  --c-warn: 192 57 43;
+}
