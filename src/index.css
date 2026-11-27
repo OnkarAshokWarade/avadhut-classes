@@ -1,0 +1,66 @@
+@import './styles/tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    @apply bg-white font-sans text-body font-light text-ink antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-medium text-plum;
+  }
+  /* The brand never uses Bold — emphasis is Medium. */
+  b,
+  strong {
+    @apply font-medium;
+  }
+  /* Marathi is always set in Poppins (p18, p27). */
+  :lang(mr) {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-deepblue));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  ::selection {
+    background: rgb(var(--c-lavender));
+    color: rgb(var(--c-plum));
+  }
+}
+
+@layer components {
+  /* Tracked caps section label: Inter Medium 12, +22% tracking (p19) */
+  .label {
+    @apply font-sans text-label font-medium uppercase;
+  }
+  .container-page {
+    @apply mx-auto w-full max-w-page px-4 sm:px-6 lg:px-8;
+  }
+  /* On very large monitors (2xl and up) the page can use a little more width than the usual reading-width cap. */
+  @media (min-width: 1536px) {
+    .container-page {
+      max-width: 1480px;
+    }
+  }
+  .link {
+    @apply text-deepblue underline decoration-deepblue/30 underline-offset-4 transition-colors hover:decoration-deepblue;
+  }
+  .card {
+    @apply border border-ink/10 bg-white;
+  }
+}
